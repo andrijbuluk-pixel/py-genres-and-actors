@@ -48,17 +48,20 @@ def delete_actor(actor_id: int) -> None:
 def main() -> QuerySet:
 
     # Create genres
-    create_genre("Western")
-    create_genre("Action")
-    create_genre("Dramma")
+    for genre in ["Western", "Action", "Dramma"]:
+        create_genre(genre)
 
     # Create actors
-    create_actor("George", "Klooney")
-    create_actor("Kianu", "Reaves")
-    create_actor("Will", "Smith")
-    create_actor("Jaden", "Smith")
-    create_actor("Scarlett", "Keegan")
-    create_actor("Scarlett", "Johansson")
+    actore = [
+        ("George", "Klooney"),
+        ("Kianu", "Reaves"),
+        ("Will", "Smith"),
+        ("Jaden", "Smith"),
+        ("Scarlett", "Keegan"),
+        ("Scarlett", "Johansson")
+    ]
+    for first_name, last_name in actore:
+        create_actor(first_name, last_name)
 
     # Update genre Dramma -> Drama
     dramma = Genre.objects.get(name="Dramma")
@@ -90,7 +93,3 @@ def main() -> QuerySet:
 
     # Повертаємо QuerySet акторів із прізвищем "Smith"
     return Actor.objects.filter(last_name="Smith").order_by("first_name")
-
-
-if __name__ == "__main__":
-    main()
